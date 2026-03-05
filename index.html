@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3-Month Hypertrophy Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0e0e0e; color: #eee; font-family: 'Barlow', sans-serif; min-height: 100vh; }
+
+  .header { background: linear-gradient(160deg, #131313 0%, #1c1410 100%); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 28px 32px 22px; }
+  .header-inner { max-width: 920px; margin: 0 auto; }
+  .header-label { font-size: 11px; color: #c2410c; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; }
+  .header h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(28px,5vw,42px); font-weight: 800; color: #fff; line-height: 1; }
+  .header-sub { color: #777; margin-top: 8px; font-size: 14px; line-height: 1.6; max-width: 560px; }
+  .baseline-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+  .chip { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: #999; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.3px; }
+  .chip.highlight { border-color: rgba(249,115,22,0.4); color: #fb923c; background: rgba(249,115,22,0.08); }
+
+  .main { max-width: 920px; margin: 0 auto; padding: 24px 20px 70px; }
+
+  .phase-tabs { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 24px; }
+  .phase-btn { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 16px; cursor: pointer; text-align: left; width: 100%; transition: all 0.2s; font-family: 'Barlow Condensed', sans-serif; color: #888; }
+  .phase-btn.active { color: #111; }
+  .phase-btn .month-label { font-size: 10px; opacity: 0.8; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 3px; }
+  .phase-btn .phase-name { font-size: 19px; font-weight: 700; line-height: 1.1; }
+  .phase-btn .phase-sub { font-size: 11px; margin-top: 4px; opacity: 0.7; }
+
+  .phase-desc { border-radius: 10px; padding: 14px 18px; margin-bottom: 24px; display: flex; gap: 14px; align-items: flex-start; }
+  .phase-bar { width: 4px; min-width: 4px; height: 44px; border-radius: 2px; margin-top: 2px; }
+  .phase-desc-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+  .phase-desc-text { font-size: 13px; color: #999; line-height: 1.5; }
+
+  .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; color: #555; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+
+  /* Weekly checklist */
+  .week-section { margin-bottom: 30px; }
+  .week-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+  .week-progress-wrap { display: flex; align-items: center; gap: 10px; }
+  .week-progress-bar-bg { width: 110px; height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
+  .week-progress-bar { height: 5px; border-radius: 3px; transition: width 0.35s; }
+  .week-progress-text { font-size: 12px; color: #555; font-family: 'Barlow Condensed', sans-serif; }
+  .reset-btn { background: transparent; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: #555; font-size: 11px; font-family: 'Barlow Condensed', sans-serif; padding: 4px 10px; cursor: pointer; letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.2s; }
+  .reset-btn:hover { border-color: rgba(255,255,255,0.22); color: #999; }
+
+  .checklist-groups { display: flex; flex-direction: column; gap: 14px; }
+  .group-label { font-size: 10px; color: #4a4a4a; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'Barlow Condensed', sans-serif; margin-bottom: 8px; }
+  .checklist { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 7px; }
+  .checklist-item { background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 11px 13px; display: flex; align-items: center; gap: 11px; cursor: pointer; transition: all 0.18s; user-select: none; }
+  .checklist-item:hover { background: rgba(255,255,255,0.065); }
+  .checklist-item.checked { opacity: 0.38; }
+  .checklist-item.checked .item-name { text-decoration: line-through; color: #555; }
+  .item-check { width: 21px; height: 21px; min-width: 21px; border-radius: 5px; border: 2px solid rgba(255,255,255,0.15); background: transparent; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #111; transition: all 0.15s; }
+  .item-icon { font-size: 17px; line-height: 1; }
+  .item-text { flex: 1; min-width: 0; }
+  .item-name { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; color: #ddd; line-height: 1.2; }
+  .item-sub { font-size: 11px; color: #555; margin-top: 1px; }
+
+  .celebration { display: none; text-align: center; padding: 8px 0 2px; font-size: 13px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 1.5px; }
+
+  /* Workout blocks */
+  .workouts-grid { display: flex; flex-direction: column; gap: 10px; }
+  .workout-block { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.07); transition: border-color 0.2s; }
+  .workout-header { width: 100%; background: rgba(255,255,255,0.025); border: none; padding: 15px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; user-select: none; }
+  .workout-header-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .workout-title { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; color: #eee; }
+  .workout-badge { border-radius: 6px; padding: 3px 9px; font-size: 11px; font-weight: 700; color: #111; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.3px; }
+  .workout-pct { border-radius: 20px; padding: 2px 9px; font-size: 11px; font-weight: 700; color: #111; display: none; font-family: 'Barlow Condensed', sans-serif; }
+  .workout-arrow { font-size: 14px; transition: transform 0.2s; flex-shrink: 0; margin-left: 8px; }
+  .workout-body { display: none; padding: 0 18px 18px; }
+  .workout-block.open .workout-body { display: block; }
+  .workout-block.open .workout-arrow { transform: rotate(180deg); }
+
+  .prog-note { border-left: 3px solid; border-radius: 0 8px 8px 0; padding: 9px 13px; margin-bottom: 14px; font-size: 12px; color: #777; line-height: 1.55; }
+  .prog-note strong { color: #aaa; }
+
+  /* Muscle group sections within workout */
+  .muscle-section { margin-bottom: 16px; }
+  .muscle-label { font-size: 10px; color: #444; text-transform: uppercase; letter-spacing: 1px; font-family: 'Barlow Condensed', sans-serif; padding: 8px 0 6px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 2px; }
+
+  .ex-table { width: 100%; border-collapse: collapse; }
+  .ex-table th { font-size: 9px; color: #444; text-transform: uppercase; letter-spacing: 0.8px; font-family: 'Barlow Condensed', sans-serif; padding: 5px 6px 5px 0; text-align: left; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .ex-table th.center { text-align: center; }
+  .ex-table td { padding: 9px 6px 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
+  .ex-row { transition: opacity 0.2s; }
+  .ex-row.done { opacity: 0.35; }
+  .ex-row.done .ex-name { text-decoration: line-through; color: #555; }
+  .ex-name { font-size: 13px; font-weight: 600; color: #ddd; font-family: 'Barlow Condensed', sans-serif; line-height: 1.3; }
+  .ex-note { font-size: 10px; color: #4a4a4a; font-style: italic; margin-top: 2px; line-height: 1.4; }
+  .ex-tag { display: inline-block; font-size: 9px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; border-radius: 3px; padding: 1px 5px; margin-top: 3px; }
+  .tag-w { background: rgba(251,191,36,0.1); color: #d97706; }
+  .tag-c { background: rgba(99,202,255,0.1); color: #38bdf8; }
+  .num-cell { font-size: 13px; font-family: 'Barlow Condensed', sans-serif; white-space: nowrap; padding-right: 10px; }
+  .weight-cell { font-size: 12px; font-family: 'Barlow Condensed', sans-serif; white-space: nowrap; color: #d97706; }
+  .rest-cell { font-size: 11px; color: #4a4a4a; font-family: 'Barlow Condensed', sans-serif; white-space: nowrap; }
+  .check-btn { width: 23px; height: 23px; border-radius: 5px; cursor: pointer; border: 2px solid rgba(255,255,255,0.15); background: transparent; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #111; font-weight: 700; transition: all 0.15s; margin: 0 auto; }
+
+  /* Hypertrophy tip banner */
+  .hyp-banner { background: rgba(249,115,22,0.07); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 14px 18px; margin-bottom: 24px; display: flex; gap: 12px; align-items: flex-start; }
+  .hyp-banner-icon { font-size: 20px; line-height: 1; margin-top: 1px; }
+  .hyp-banner-text { font-size: 13px; color: #999; line-height: 1.6; }
+  .hyp-banner-text strong { color: #fb923c; }
+
+  .tips { margin-top: 28px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 18px 20px; }
+  .tips-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; margin-bottom: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+  .tip { font-size: 13px; color: #777; margin-bottom: 9px; line-height: 1.55; }
+  .tip strong { color: #bbb; }
+
+  /* Per-row skip checkbox */
+  .skip-cell-btn { width: 23px; height: 23px; border-radius: 5px; cursor: pointer; border: 2px solid rgba(255,100,30,0.2); background: transparent; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #111; font-weight: 700; transition: all 0.15s; margin: 0 auto; }
+  .skip-cell-btn:hover { border-color: rgba(255,130,50,0.5); background: rgba(255,100,30,0.06); }
+  .skip-cell-btn.skipped { background: #fb923c; border-color: #fb923c; }
+  .ex-row.skipped { opacity: 0.35; }
+  .ex-row.skipped .ex-name { text-decoration: line-through; color: #555; }
+  .ex-table th.skip-col { color: #6b3a1f; }
+
+
+  @media (max-width: 600px) {
+    .checklist { grid-template-columns: 1fr 1fr; }
+    .header { padding: 20px 16px; }
+    .ex-table th:nth-child(5), .ex-table td:nth-child(5) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-label">Hypertrophy · 3-Month Program</div>
+    <h1>Adam's Workout Plan</h1>
+    <p class="header-sub">Starting from your actual baseline — progressive overload on every lift, every month.</p>
+    <div style="font-size:11px;color:#555;letter-spacing:1.5px;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;font-weight:700;margin-top:14px;margin-bottom:8px;">Activities</div>
+    <div class="baseline-chips">
+      <span class="chip">25+ push-ups ✓</span>
+      <span class="chip">Curls · Press · Triceps · Rows @ 20 lb</span>
+      <span class="chip">Squats 120 lb · Deadlift · Lunges</span>
+      <span class="chip">Weighted abs 20 lb</span>
+      <span class="chip">🏃 Run weekly</span>
+      <span class="chip">🧗 Climb weekly</span>
+      <span class="chip">🏐 Volleyball weekly</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="phase-tabs" id="phaseTabs"></div>
+
+  <div class="hyp-banner">
+    <div class="hyp-banner-icon">📐</div>
+    <div class="hyp-banner-text">
+      <strong>Hypertrophy rule of thumb:</strong> For muscle growth, keep most sets in the <strong>8–15 rep range</strong>, rest <strong>60–90s between sets</strong>, and aim to feel a <strong>stretch + burn</strong> in the target muscle. Add weight when you can complete the top of the rep range with 1–2 reps left in the tank.
+    </div>
+  </div>
+
+  <div class="phase-desc" id="phaseDesc"></div>
+
+  <div class="week-section">
+    <div class="week-header">
+      <div class="section-label" style="margin-bottom:0">This Week's Activities</div>
+      <div class="week-progress-wrap">
+        <div class="week-progress-bar-bg"><div class="week-progress-bar" id="weekProgressBar" style="width:0%"></div></div>
+        <span class="week-progress-text" id="weekProgressText">0 / 0</span>
+        <button class="reset-btn" onclick="exportCSV()" title="Download this week as CSV">⬇ Export CSV</button>
+        <button class="reset-btn" onclick="handleResetClick()">↺ Reset Week</button>
+      </div>
+    </div>
+    <div id="celebration" class="celebration"></div>
+    <div class="checklist-groups" id="weekChecklist"></div>
+  </div>
+
+  <div class="section-label">Workout Details — expand to track sets</div>
+  <div class="workouts-grid" id="workouts"></div>
+
+  <div class="tips">
+    <div class="tips-title">Program Notes</div>
+    <div class="tip">📈 <strong>Weight progression:</strong> Add 5 lb to DB lifts when you hit the top rep target for all sets. Add 5–10 lb to squat/deadlift each month.</div>
+    <div class="tip">💪 <strong>Push-ups for size:</strong> Since you can do 25+ easily, we're using harder variations (archer, decline, weighted) and slow tempos (3s down) to keep the muscle under tension long enough to grow.</div>
+    <div class="tip">🧗 <strong>Climbing = back day.</strong> Your rows and climbing together hit lats, rhomboids, and biceps — no extra pull day needed.</div>
+    <div class="tip">⏱️ <strong>Time your abs:</strong> Your 10-min weighted ab block stays as a circuit. Going heavier is better than going longer — 25–30 lb crunches beat 20 lb for longer.</div>
+    <div class="tip">😴 <strong>Sleep & eat:</strong> Hypertrophy requires a small surplus. Aim for 0.8–1g protein per lb of bodyweight and 7–9 hrs sleep. Without these, lifts go up but muscle doesn't.</div>
+    <div class="tip">🦵 <strong>Leg day targets:</strong> Month 1 → 125–130 lb squat. Month 2 → 140–150 lb. Month 3 → 155–175 lb. Adjust if needed — form > weight.</div>
+  </div>
+</div>
+
+
+<script>
+const phases = [
+  {
+    phase: 1, title: "Groove", months: "Month 1",
+    phaseSub: "Load baseline + hypertrophy rep ranges",
+    color: "#4ade80",
+    description: "You're already strong — the goal this month is shifting your existing routine into hypertrophy rep ranges (8–15) and adding tempo. Keep weights the same but control every rep. Establish the habit of tracking.",
+    progressionNote: "Keep all weights at your current baseline. Focus on full ROM and a 3-second lowering phase. Hit the top of each rep range before adding weight.",
+
+    weeklyTargets: [
+      { group: "Strength", items: [
+        { id: "upper", icon: "💪", name: "Upper Body",     sub: "Arms · chest · abs" },
+        { id: "legs",  icon: "🦵", name: "Leg Day",        sub: "Squat · deadlift · lunges" },
+      ]},
+      { group: "Cardio & Skill", items: [
+        { id: "run",   icon: "🏃", name: "Run",            sub: "2–3 miles, easy" },
+        { id: "climb", icon: "🧗", name: "Climb",          sub: "Back, grip, forearms" },
+        { id: "vball", icon: "🏐", name: "Volleyball",     sub: "Cardio + agility" },
+      ]},
+      { group: "Recovery", items: [
+        { id: "rest",     icon: "😴", name: "Rest Day",    sub: "Full rest or walk" },
+        { id: "mobility", icon: "🧘", name: "Mobility",    sub: "10 min stretch / foam roll" },
+      ]},
+    ],
+
+    workouts: [
+      {
+        name: "Upper Body", badge: "20 lb DB",
+        progNote: "All lifts at current 20 lb. Add a 3s lowering phase to every rep. Goal: complete all sets cleanly before adding weight.",
+        muscleGroups: [
+          { label: "Biceps", exercises: [
+            { name: "Dumbbell Bicep Curls",      sets:"3", reps:"10–12", weight:"20 lb",  rest:"60s", note:"Full ROM — stretch at bottom, squeeze at top", tag:"w" },
+            { name: "Hammer Curls",              sets:"3", reps:"10–12", weight:"20 lb",  rest:"60s", note:"Neutral grip, 3s lowering phase", tag:"w" },
+          ]},
+          { label: "Shoulders", exercises: [
+            { name: "Dumbbell Shoulder Press",   sets:"3", reps:"10–12", weight:"20 lb",  rest:"75s", note:"Seated, elbows at 90° start, full lockout", tag:"w" },
+            { name: "Lateral Raises",            sets:"3", reps:"12–15", weight:"10–15 lb",rest:"60s",note:"Slight bend in elbow, no shrug", tag:"w" },
+          ]},
+          { label: "Triceps", exercises: [
+            { name: "Tricep Overhead Extension", sets:"3", reps:"10–12", weight:"20 lb",  rest:"60s", note:"Single DB both hands, full stretch overhead", tag:"w" },
+            { name: "Tricep Kickbacks",          sets:"3", reps:"12",    weight:"15–20 lb",rest:"60s",note:"Elbow stays at hip height, full extension", tag:"w" },
+          ]},
+          { label: "Rows / Back", exercises: [
+            { name: "Bent-over DB Rows",         sets:"3", reps:"10–12", weight:"20 lb",  rest:"75s", note:"Hinge at hip, pull elbow to hip, squeeze", tag:"w" },
+          ]},
+          { label: "Chest (Push-ups)", exercises: [
+            { name: "Decline Push-ups",          sets:"3", reps:"15–20", weight:"BW",     rest:"60s", note:"Feet elevated — harder than standard, upper chest", tag:"c" },
+            { name: "Archer Push-ups",           sets:"3", reps:"8 each",weight:"BW",     rest:"75s", note:"Extend one arm wide, shift weight — unilateral load", tag:"c" },
+          ]},
+          { label: "Abs (10-min circuit)", exercises: [
+            { name: "Weighted Crunches",         sets:"3", reps:"20",    weight:"20 lb",  rest:"30s", note:"DB/plate on chest, full crunch", tag:"w" },
+            { name: "Weighted Sit-ups",          sets:"3", reps:"15",    weight:"20 lb",  rest:"30s", note:"Feet anchored, hold weight on chest", tag:"w" },
+            { name: "Russian Twists",            sets:"3", reps:"20",    weight:"20 lb",  rest:"30s", note:"Feet off floor, rotate fully each side", tag:"w" },
+            { name: "Plank",                     sets:"2", reps:"40s",   weight:"BW",     rest:"20s", note:"Squeeze abs and glutes", tag:"c" },
+          ]},
+        ]
+      },
+      {
+        name: "Leg Day", badge: "120–130 lb Squat",
+        progNote: "Stay at current weights. Add tempo: 3s descent on squats and lunges. Full ROM on every rep. Aim for 125–130 lb squat by end of month.",
+        muscleGroups: [
+          { label: "Squats", exercises: [
+            { name: "Back Squat",                sets:"4", reps:"8–10",   weight:"120–130 lb",rest:"2min",note:"3s descent, drive knees out, depth below parallel", tag:"w" },
+            { name: "Goblet Squat",              sets:"3", reps:"12",     weight:"20 lb DB",  rest:"75s", note:"Elbows inside knees at bottom, upright torso", tag:"w" },
+          ]},
+          { label: "Deadlifts", exercises: [
+            { name: "Conventional Deadlift",     sets:"3", reps:"6–8",    weight:"Current",   rest:"2min",note:"Lat engagement, brace core, bar close to shins", tag:"w" },
+            { name: "Romanian Deadlift",         sets:"3", reps:"10–12",  weight:"Current",   rest:"90s", note:"Feel hamstring stretch, soft knee bend", tag:"w" },
+          ]},
+          { label: "Lunges & Accessories", exercises: [
+            { name: "Weighted Lunges",           sets:"3", reps:"10 each",weight:"20 lb DB",  rest:"75s", note:"3s descent, back knee near floor, upright torso", tag:"w" },
+            { name: "Bulgarian Split Squat",     sets:"3", reps:"10 each",weight:"BW",        rest:"90s", note:"Back foot elevated, front shin vertical", tag:"c" },
+            { name: "Glute Bridge",              sets:"3", reps:"15",     weight:"BW",        rest:"45s", note:"Drive hips, hard squeeze at top", tag:"c" },
+            { name: "Calf Raises",               sets:"3", reps:"20",     weight:"BW",        rest:"30s", note:"Full ROM, pause at top", tag:"c" },
+          ]},
+        ]
+      },
+    ]
+  },
+
+  {
+    phase: 2, title: "Load", months: "Month 2",
+    phaseSub: "Add weight + volume on all lifts",
+    color: "#facc15",
+    description: "Now you add weight. DB work moves to 25 lb where possible. Squats jump to 135–150 lb. Push-up variations get harder. This is where hypertrophy really starts — more tension, more volume.",
+    progressionNote: "DB lifts: step up to 25 lb. Squats: 135–150 lb target. Deadlift: +10–15 lb from Month 1 top. Lunges: 25 lb DB. Add 1 extra set to key lifts.",
+
+    weeklyTargets: [
+      { group: "Strength", items: [
+        { id: "upper", icon: "💪", name: "Upper Body",     sub: "Arms · chest · abs" },
+        { id: "legs",  icon: "🦵", name: "Leg Day",        sub: "Squat · deadlift · lunges" },
+      ]},
+      { group: "Cardio & Skill", items: [
+        { id: "run",   icon: "🏃", name: "Run",            sub: "2–4 miles, add hills" },
+        { id: "climb", icon: "🧗", name: "Climb",          sub: "Back, grip, forearms" },
+        { id: "vball", icon: "🏐", name: "Volleyball",     sub: "Cardio + agility" },
+      ]},
+      { group: "Recovery", items: [
+        { id: "rest",     icon: "😴", name: "Rest Day",    sub: "Full rest or walk" },
+        { id: "mobility", icon: "🧘", name: "Mobility",    sub: "10 min stretch / foam roll" },
+      ]},
+    ],
+
+    workouts: [
+      {
+        name: "Upper Body", badge: "25 lb DB",
+        progNote: "Step up to 25 lb on curls, press, and rows. Add an extra set to your main lifts. Keep the 3s lowering phase — it's what makes this growth, not just strength.",
+        muscleGroups: [
+          { label: "Biceps", exercises: [
+            { name: "Dumbbell Bicep Curls",       sets:"4", reps:"10–12", weight:"25 lb",  rest:"60s", note:"Full ROM, supinate at top (turn palm up)", tag:"w" },
+            { name: "Hammer Curls",               sets:"3", reps:"10–12", weight:"25 lb",  rest:"60s", note:"3s lowering, brachialis focus", tag:"w" },
+            { name: "Incline Dumbbell Curl",       sets:"3", reps:"10",   weight:"20 lb",  rest:"60s", note:"Seated on incline — stretches long head more", tag:"w" },
+          ]},
+          { label: "Shoulders", exercises: [
+            { name: "Dumbbell Shoulder Press",    sets:"4", reps:"10–12", weight:"25 lb",  rest:"75s", note:"Full lockout, don't lock joints aggressively", tag:"w" },
+            { name: "Lateral Raises",             sets:"4", reps:"12–15", weight:"15 lb",  rest:"60s", note:"Hold 1s at top, slow down on the way down", tag:"w" },
+            { name: "Arnold Press",               sets:"3", reps:"10",    weight:"20 lb",  rest:"75s", note:"Rotate from palms-in to palms-out as you press", tag:"w" },
+          ]},
+          { label: "Triceps", exercises: [
+            { name: "Tricep Overhead Extension",  sets:"4", reps:"10–12", weight:"25 lb",  rest:"60s", note:"Full stretch, elbows pointing forward", tag:"w" },
+            { name: "Tricep Kickbacks",           sets:"3", reps:"12",    weight:"20 lb",  rest:"60s", note:"Elbow at hip, full extension, squeeze tricep", tag:"w" },
+          ]},
+          { label: "Rows / Back", exercises: [
+            { name: "Bent-over DB Rows",          sets:"4", reps:"10–12", weight:"25 lb",  rest:"75s", note:"Chest up, pull elbow past hip, pause at top", tag:"w" },
+          ]},
+          { label: "Chest (Push-ups)", exercises: [
+            { name: "Weighted Push-ups",          sets:"4", reps:"12–15", weight:"BW+bag", rest:"75s", note:"Backpack with 10–15 lb on back, standard form", tag:"c" },
+            { name: "Archer Push-ups",            sets:"3", reps:"10 each",weight:"BW",    rest:"75s", note:"Working toward 1-arm — go as wide as able", tag:"c" },
+            { name: "Pike Push-ups",              sets:"3", reps:"12",    weight:"BW",     rest:"60s", note:"Hips high, head nearly touches floor", tag:"c" },
+          ]},
+          { label: "Abs (10-min circuit)", exercises: [
+            { name: "Weighted Crunches",          sets:"3", reps:"20",    weight:"25 lb",  rest:"30s", note:"Try 25 lb — if easy, go to 30 lb", tag:"w" },
+            { name: "Weighted Sit-ups",           sets:"3", reps:"15",    weight:"25 lb",  rest:"30s", note:"Full ROM, slow on the way down", tag:"w" },
+            { name: "Russian Twists",             sets:"3", reps:"24",    weight:"20 lb",  rest:"30s", note:"More reps than M1, maintain pace", tag:"w" },
+            { name: "Leg Raises",                 sets:"3", reps:"15",    weight:"BW",     rest:"20s", note:"Lower back on floor, slow lowering", tag:"c" },
+          ]},
+        ]
+      },
+      {
+        name: "Leg Day", badge: "135–150 lb Squat",
+        progNote: "Main squat should hit 135–150 lb. Deadlift: add 10–15 lb from your Month 1 working set. Lunges: move to 25 lb DBs. Add Bulgarian split squats with load.",
+        muscleGroups: [
+          { label: "Squats", exercises: [
+            { name: "Back Squat",                 sets:"4", reps:"6–8",   weight:"135–150 lb",rest:"2min",note:"3s descent, drive knees out, full depth", tag:"w" },
+            { name: "Pause Squat",                sets:"2", reps:"5",     weight:"105–115 lb",rest:"2min",note:"3s pause at bottom — builds quad strength", tag:"w" },
+            { name: "Goblet Squat",               sets:"3", reps:"12",    weight:"25 lb DB",  rest:"75s", note:"Increase from M1 — more load, same form", tag:"w" },
+          ]},
+          { label: "Deadlifts", exercises: [
+            { name: "Conventional Deadlift",      sets:"4", reps:"5–6",   weight:"+10–15 lb", rest:"2min",note:"Heavier than M1 — brace harder, bar stays close", tag:"w" },
+            { name: "Romanian Deadlift",          sets:"3", reps:"10–12", weight:"+5 lb",     rest:"90s", note:"Full stretch at bottom, no rounding", tag:"w" },
+          ]},
+          { label: "Lunges & Accessories", exercises: [
+            { name: "Weighted Lunges",            sets:"4", reps:"10 each",weight:"25 lb DB",  rest:"75s", note:"Step up 5 lb from Month 1", tag:"w" },
+            { name: "Bulgarian Split Squat",      sets:"3", reps:"10 each",weight:"20 lb DB",  rest:"90s", note:"Add load from M1 bodyweight version", tag:"w" },
+            { name: "Hip Thrust",                 sets:"3", reps:"12",    weight:"20 lb DB",  rest:"60s", note:"Shoulder on bench, DB on hips, full hip extension", tag:"w" },
+            { name: "Calf Raises (weighted)",     sets:"3", reps:"15",    weight:"20 lb DB",  rest:"30s", note:"Hold DBs, full ROM, pause at top", tag:"w" },
+          ]},
+        ]
+      },
+    ]
+  },
+
+  {
+    phase: 3, title: "Grow", months: "Month 3",
+    phaseSub: "Max tension, advanced variations",
+    color: "#f97316",
+    description: "This is the payoff month. Heaviest weights, most volume, hardest calisthenics. Every lift should be close to a personal best. Push-ups approach 1-arm territory. Abs hit 25–30 lb. Squat targets 155–175 lb.",
+    progressionNote: "DB lifts: 25–30 lb. Abs: 25–30 lb weighted. Squats: 155–175 lb (5×5). Deadlift: new 5-rep max. Push for visible progress in mirror.",
+
+    weeklyTargets: [
+      { group: "Strength", items: [
+        { id: "upper", icon: "💪", name: "Upper Body",     sub: "Arms · chest · abs" },
+        { id: "legs",  icon: "🦵", name: "Leg Day",        sub: "Squat · deadlift · lunges" },
+      ]},
+      { group: "Cardio & Skill", items: [
+        { id: "run",   icon: "🏃", name: "Run",            sub: "3–5 miles, tempo optional" },
+        { id: "climb", icon: "🧗", name: "Climb",          sub: "Back, grip, forearms" },
+        { id: "vball", icon: "🏐", name: "Volleyball",     sub: "Cardio + agility" },
+      ]},
+      { group: "Recovery", items: [
+        { id: "rest",     icon: "😴", name: "Rest Day",    sub: "Full rest or walk" },
+        { id: "mobility", icon: "🧘", name: "Mobility",    sub: "10 min stretch / foam roll" },
+      ]},
+    ],
+
+    workouts: [
+      {
+        name: "Upper Body", badge: "25–30 lb DB",
+        progNote: "Step up to 30 lb where possible. Calisthenics move to loaded and 1-arm progressions. Ab circuit hits 25–30 lb weighted. This is your biggest upper body month.",
+        muscleGroups: [
+          { label: "Biceps", exercises: [
+            { name: "Dumbbell Bicep Curls",        sets:"4", reps:"10",   weight:"25–30 lb", rest:"60s", note:"Test 30 lb — if form breaks down, stay at 25", tag:"w" },
+            { name: "Incline Dumbbell Curl",        sets:"4", reps:"10",  weight:"20–25 lb", rest:"60s", note:"Peak bicep stretch, pause at bottom", tag:"w" },
+            { name: "Hammer Curls",                 sets:"3", reps:"10",  weight:"25 lb",    rest:"60s", note:"Brachialis + brachioradialis — adds arm thickness", tag:"w" },
+          ]},
+          { label: "Shoulders", exercises: [
+            { name: "Dumbbell Shoulder Press",      sets:"5", reps:"8–10",weight:"25–30 lb", rest:"75s", note:"5 sets this month — most volume yet", tag:"w" },
+            { name: "Arnold Press",                 sets:"3", reps:"10",  weight:"25 lb",    rest:"75s", note:"Full rotation, controlled on the way down", tag:"w" },
+            { name: "Lateral Raises",               sets:"4", reps:"15",  weight:"15 lb",    rest:"45s", note:"Go straight into rear delt fly as superset", tag:"w" },
+          ]},
+          { label: "Triceps", exercises: [
+            { name: "Tricep Overhead Extension",    sets:"4", reps:"10",  weight:"25–30 lb", rest:"60s", note:"Full stretch at bottom — long head growth", tag:"w" },
+            { name: "Diamond Push-ups",             sets:"3", reps:"15",  weight:"BW",       rest:"60s", note:"Elbows in tight, full lockout", tag:"c" },
+          ]},
+          { label: "Rows / Back", exercises: [
+            { name: "Bent-over DB Rows",            sets:"4", reps:"10",  weight:"25–30 lb", rest:"75s", note:"Heavier than M2 — pause 1s at top squeeze", tag:"w" },
+          ]},
+          { label: "Chest (Push-ups)", exercises: [
+            { name: "Weighted Push-ups",            sets:"4", reps:"15",  weight:"BW+15 lb", rest:"75s", note:"Backpack with 15 lb — keep core tight", tag:"c" },
+            { name: "1-Arm Push-up Negatives",      sets:"4", reps:"5 each",weight:"BW",     rest:"90s", note:"Lower on 1 arm, push back up with 2 — peak tension", tag:"c" },
+            { name: "Pseudo Planche Push-up",       sets:"3", reps:"10",  weight:"BW",       rest:"75s", note:"Hands angled back, lean forward — chest + shoulder", tag:"c" },
+          ]},
+          { label: "Abs (10-min circuit)", exercises: [
+            { name: "Weighted Crunches",            sets:"4", reps:"20",  weight:"25–30 lb", rest:"30s", note:"Heaviest month — feel each contraction", tag:"w" },
+            { name: "Weighted Sit-ups",             sets:"3", reps:"15",  weight:"25 lb",    rest:"30s", note:"Slow 3s descent on every rep", tag:"w" },
+            { name: "Dragon Flag Negatives",        sets:"3", reps:"5",   weight:"BW",       rest:"45s", note:"Grip bench overhead, lower slow as possible", tag:"c" },
+            { name: "Russian Twists",               sets:"3", reps:"24",  weight:"25 lb",    rest:"20s", note:"Increase weight from M2", tag:"w" },
+          ]},
+        ]
+      },
+      {
+        name: "Leg Day", badge: "155–175 lb Squat",
+        progNote: "5×5 squat protocol this month — strength + size. Push for a deadlift PR. Lunges at 25–30 lb. Add deficit deadlifts and Nordic curls.",
+        muscleGroups: [
+          { label: "Squats", exercises: [
+            { name: "Back Squat",                   sets:"5", reps:"5",   weight:"155–175 lb",rest:"2min",note:"5×5 protocol — heaviest working set yet", tag:"w" },
+            { name: "Front Squat",                  sets:"3", reps:"6",   weight:"95–115 lb", rest:"2min",note:"Upright torso, elbows high — quad isolation", tag:"w" },
+          ]},
+          { label: "Deadlifts", exercises: [
+            { name: "Conventional Deadlift",        sets:"4", reps:"4–5", weight:"New 5RM",   rest:"2min",note:"Push for a personal best 5-rep max", tag:"w" },
+            { name: "Deficit Deadlift",             sets:"3", reps:"5",   weight:"–20 lb",    rest:"2min",note:"Stand on plates, greater ROM = more glute/ham work", tag:"w" },
+          ]},
+          { label: "Lunges & Accessories", exercises: [
+            { name: "Weighted Lunges",              sets:"4", reps:"10 each",weight:"25–30 lb DB",rest:"75s",note:"Heaviest lunges yet — controlled pace", tag:"w" },
+            { name: "Bulgarian Split Squat",        sets:"3", reps:"10 each",weight:"25 lb DB",   rest:"90s",note:"+5 lb from M2 — deepest stretch you can manage", tag:"w" },
+            { name: "Nordic Curl Negatives",        sets:"3", reps:"5",   weight:"BW",        rest:"90s", note:"Anchor feet, lower as slow as possible — brutal hamstrings", tag:"c" },
+            { name: "Pistol Squat Negatives",       sets:"3", reps:"5 each",weight:"BW",      rest:"90s", note:"Use wall, lower on one leg, stand with two", tag:"c" },
+            { name: "Calf Raises (weighted)",       sets:"4", reps:"15",  weight:"25 lb DB",  rest:"30s", note:"Hold DBs, pause at top, slow descent", tag:"w" },
+          ]},
+        ]
+      },
+    ]
+  }
+];
+
+const STORAGE_KEY = 'workout_tracker_v4';
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch(e) {}
+  return { phase: 0, week: [{},{},{}], exChecks: {} };
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ phase: currentPhase, week: weekState, exChecks: exChecks }));
+  } catch(e) {}
+}
+
+const _saved = loadState();
+let currentPhase = _saved.phase || 0;
+const weekState = _saved.week || [{},{},{}];
+const exChecks = _saved.exChecks || {};
+const celebrations = ["🔥 Full week crushed!", "💪 Nothing missed!", "✅ Perfect week!", "🏆 All done — rest up!"];
+
+function render() { renderTabs(); renderDesc(); renderChecklist(); renderWorkouts(); }
+
+function renderTabs() {
+  document.getElementById('phaseTabs').innerHTML = phases.map((p, i) => `
+    <button class="phase-btn ${i === currentPhase ? 'active' : ''}"
+      style="${i === currentPhase ? `background:${p.color};border-color:${p.color}` : ''}"
+      onclick="switchPhase(${i})">
+      <div class="month-label">${p.months}</div>
+      <div class="phase-name">Phase ${p.phase}: ${p.title}</div>
+      <div class="phase-sub" style="color:${i === currentPhase ? '#000a' : '#555'}">${p.phaseSub}</div>
+    </button>`).join('');
+}
+
+function renderDesc() {
+  const p = phases[currentPhase];
+  const el = document.getElementById('phaseDesc');
+  el.style.background = p.color + '0e';
+  el.style.border = `1px solid ${p.color}28`;
+  el.innerHTML = `
+    <div class="phase-bar" style="background:${p.color}"></div>
+    <div>
+      <div class="phase-desc-title" style="color:${p.color}">Phase ${p.phase}: ${p.title} — ${p.phaseSub}</div>
+      <div class="phase-desc-text">${p.description}</div>
+    </div>`;
+}
+
+function renderChecklist() {
+  const p = phases[currentPhase];
+  const state = weekState[currentPhase];
+  const allItems = p.weeklyTargets.flatMap(g => g.items);
+  const total = allItems.length;
+  const done = allItems.filter(it => state[it.id]).length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+
+  document.getElementById('weekProgressBar').style.width = pct + '%';
+  document.getElementById('weekProgressBar').style.background = p.color;
+  document.getElementById('weekProgressText').textContent = `${done} / ${total}`;
+
+  const cel = document.getElementById('celebration');
+  if (done === total && total > 0) {
+    cel.style.display = 'block'; cel.style.color = p.color;
+    cel.textContent = celebrations[currentPhase];
+  } else { cel.style.display = 'none'; }
+
+  document.getElementById('weekChecklist').innerHTML = p.weeklyTargets.map(group => `
+    <div>
+      <div class="group-label">${group.group}</div>
+      <div class="checklist">
+        ${group.items.map(item => {
+          const chk = !!state[item.id];
+          return `
+          <div class="checklist-item ${chk ? 'checked' : ''}" onclick="toggleWeekItem('${item.id}')"
+               style="${chk ? `border-color:${p.color}33` : ''}">
+            <div class="item-check" style="${chk ? `background:${p.color};border-color:${p.color}` : ''}">${chk ? '✓' : ''}</div>
+            <div class="item-icon">${item.icon}</div>
+            <div class="item-text">
+              <div class="item-name">${item.name}</div>
+              <div class="item-sub">${item.sub}</div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function renderWorkouts() {
+  const p = phases[currentPhase];
+  document.getElementById('workouts').innerHTML = p.workouts.map((w, wi) => {
+    const allEx = w.muscleGroups.flatMap(mg => mg.exercises);
+
+    const rows = w.muscleGroups.map((mg, mgi) => `
+      <div class="muscle-section">
+        <div class="muscle-label">${mg.label}</div>
+        <table class="ex-table">
+          <thead><tr>
+            <th>Exercise</th><th>Sets</th><th>Reps</th><th>Weight</th><th>Rest</th><th class="center">✓</th><th class="center skip-col">Skip</th>
+          </tr></thead>
+          <tbody>
+            ${mg.exercises.map((ex, ei) => {
+              const gIdx = w.muscleGroups.slice(0,mgi).reduce((a,g)=>a+g.exercises.length,0) + ei;
+              const skipKey = `${currentPhase}-${wi}-${gIdx}-skip`;
+              const isSkipped = !!exChecks[skipKey];
+              return `<tr class="ex-row${isSkipped ? ' skipped' : ''}" id="ex-${wi}-${gIdx}">
+                <td>
+                  <div class="ex-name">${ex.name}</div>
+                  <div class="ex-note">${ex.note}</div>
+                  <span class="ex-tag ${ex.tag==='w'?'tag-w':'tag-c'}">${ex.tag==='w'?'⚖️ Weighted':'🤸 Cali'}</span>
+                </td>
+                <td class="num-cell" style="color:${p.color};font-weight:700">${ex.sets}</td>
+                <td class="num-cell">${ex.reps}</td>
+                <td class="weight-cell">${ex.weight}</td>
+                <td class="rest-cell">${ex.rest}</td>
+                <td><button class="check-btn" id="chk-${wi}-${gIdx}" onclick="toggleCheck(${wi},${gIdx},${allEx.length})"></button></td>
+                <td class="skip-col"><button class="skip-cell-btn${isSkipped ? ' skipped' : ''}" id="skp-${wi}-${gIdx}" onclick="toggleSkipRow(${wi},${gIdx},${allEx.length})">⊘</button></td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>`).join('');
+
+    return `
+      <div class="workout-block ${wi===0?'open':''}" id="wb-${wi}"
+           style="${wi===0?`border-color:${p.color}55`:''}">
+        <div class="workout-header" style="${wi===0?`background:${p.color}0f`:''}; cursor:pointer;" onclick="toggleWorkout(${wi})">
+          <div class="workout-header-left">
+            <span class="workout-title">${w.name}</span>
+            <span class="workout-badge" style="background:${p.color}22;color:${p.color}">${w.badge}</span>
+            <span class="workout-pct" id="pct-${wi}" style="background:${p.color}"></span>
+          </div>
+          <span class="workout-arrow" style="color:${p.color}55">▼</span>
+        </div>
+        <div class="workout-body">
+          <div class="prog-note" style="border-color:${p.color};background:${p.color}08">
+            <strong>Month ${p.phase} focus:</strong> ${w.progNote}
+          </div>
+          ${rows}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function switchPhase(i) { currentPhase = i; saveState(); render(); }
+
+function toggleWeekItem(id) {
+  weekState[currentPhase][id] = !weekState[currentPhase][id];
+  saveState();
+  renderChecklist();
+}
+
+function resetWeek() {
+  weekState[currentPhase] = {};
+  // Clear all exercise checks and skips for current phase
+  Object.keys(exChecks).forEach(k => { if (k.startsWith(`${currentPhase}-`)) delete exChecks[k]; });
+  saveState();
+  render();
+  restoreExChecks();
+}
+
+
+function exportCSV() {
+  const p = phases[currentPhase];
+  const weekDate = new Date().toISOString().slice(0,10);
+  const rows = [['Week Export', weekDate], ['Phase', `${p.phase}: ${p.title}`], []];
+  rows.push(['--- WEEKLY ACTIVITIES ---']);
+  rows.push(['Activity', 'Status']);
+  p.weeklyTargets.forEach(group => {
+    group.items.forEach(item => {
+      const status = weekState[currentPhase][item.id] ? 'Completed' : 'Not Done';
+      rows.push([item.name, status]);
+    });
+  });
+  rows.push([]);
+  rows.push(['--- WORKOUT DETAILS ---']);
+  rows.push(['Workout', 'Exercise', 'Muscle Group', 'Sets', 'Reps', 'Weight', 'Status']);
+  p.workouts.forEach((w, wi) => {
+    let gIdx = 0;
+    w.muscleGroups.forEach(mg => {
+      mg.exercises.forEach(ex => {
+        const doneKey = `${currentPhase}-${wi}-${gIdx}`;
+        const skipKey = `${currentPhase}-${wi}-${gIdx}-skip`;
+        const status = exChecks[skipKey] ? 'Skipped' : exChecks[doneKey] ? 'Done' : 'Not Done';
+        rows.push([w.name, ex.name, mg.label, ex.sets, ex.reps, ex.weight, status]);
+        gIdx++;
+      });
+    });
+  });
+
+  const csv = rows.map(r => r.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `workout_week_${weekDate}_phase${p.phase}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+
+function toggleWorkout(wi) {
+  const block = document.getElementById(`wb-${wi}`);
+  const p = phases[currentPhase];
+  const isOpen = block.classList.contains('open');
+  block.classList.toggle('open');
+  block.style.borderColor = !isOpen ? p.color+'55' : 'rgba(255,255,255,0.07)';
+  block.querySelector('.workout-header').style.background = !isOpen ? p.color+'0f' : 'rgba(255,255,255,0.025)';
+}
+
+function toggleCheck(wi, ei, total) {
+  const key = `${currentPhase}-${wi}-${ei}`;
+  const skipKey = `${currentPhase}-${wi}-${ei}-skip`;
+  const p = phases[currentPhase];
+  const row = document.getElementById(`ex-${wi}-${ei}`);
+  const btn = document.getElementById(`chk-${wi}-${ei}`);
+  const skipBtn = document.getElementById(`skp-${wi}-${ei}`);
+  const isDone = row.classList.contains('done');
+  exChecks[key] = !isDone;
+  // Clear skip if checking
+  if (!isDone && exChecks[skipKey]) {
+    delete exChecks[skipKey];
+    row.classList.remove('skipped');
+    if (skipBtn) { skipBtn.classList.remove('skipped'); }
+  }
+  row.classList.toggle('done');
+  btn.style.background = isDone ? 'transparent' : p.color;
+  btn.style.borderColor = isDone ? 'rgba(255,255,255,0.15)' : p.color;
+  btn.textContent = isDone ? '' : '✓';
+  saveState();
+  updatePct(wi, total);
+}
+
+function updatePct(wi, total) {
+  const p = phases[currentPhase];
+  const pctEl = document.getElementById(`pct-${wi}`);
+  let done = 0;
+  for (let i = 0; i < total; i++) {
+    const doneKey = `${currentPhase}-${wi}-${i}`;
+    const skipKey = `${currentPhase}-${wi}-${i}-skip`;
+    if (exChecks[doneKey] || exChecks[skipKey]) done++;
+  }
+  pctEl.style.background = p.color;
+  pctEl.style.display = done > 0 ? 'inline' : 'none';
+  pctEl.textContent = Math.round((done/total)*100)+'%';
+}
+
+function toggleSkipRow(wi, ei, total) {
+  const skipKey = `${currentPhase}-${wi}-${ei}-skip`;
+  const doneKey = `${currentPhase}-${wi}-${ei}`;
+  const p = phases[currentPhase];
+  const row = document.getElementById(`ex-${wi}-${ei}`);
+  const skipBtn = document.getElementById(`skp-${wi}-${ei}`);
+  const chkBtn = document.getElementById(`chk-${wi}-${ei}`);
+  const isSkipped = !!exChecks[skipKey];
+
+  if (!isSkipped) {
+    // Skip: mark skipped, clear done
+    exChecks[skipKey] = true;
+    delete exChecks[doneKey];
+    row.classList.remove('done');
+    row.classList.add('skipped');
+    skipBtn.classList.add('skipped');
+    chkBtn.style.background = 'transparent';
+    chkBtn.style.borderColor = 'rgba(255,255,255,0.15)';
+    chkBtn.textContent = '';
+  } else {
+    // Unskip
+    delete exChecks[skipKey];
+    row.classList.remove('skipped');
+    skipBtn.classList.remove('skipped');
+  }
+  saveState();
+  updatePct(wi, total);
+}
+
+function handleResetClick() {
+  if (confirm('Reset this week\'s progress? This cannot be undone. Export your CSV first if you want a record.')) resetWeek();
+}
+
+// Restore exercise check visual state after render
+function restoreExChecks() {
+  phases[currentPhase].workouts.forEach((w, wi) => {
+    const allEx = w.muscleGroups.flatMap(mg => mg.exercises);
+    allEx.forEach((_, ei) => {
+      const key = `${currentPhase}-${wi}-${ei}`;
+      const skipKey = `${currentPhase}-${wi}-${ei}-skip`;
+      const p = phases[currentPhase];
+      if (exChecks[key]) {
+        const row = document.getElementById(`ex-${wi}-${ei}`);
+        const btn = document.getElementById(`chk-${wi}-${ei}`);
+        if (row) row.classList.add('done');
+        if (btn) { btn.style.background = p.color; btn.style.borderColor = p.color; btn.textContent = '✓'; }
+      }
+      if (exChecks[skipKey]) {
+        const row = document.getElementById(`ex-${wi}-${ei}`);
+        const skipBtn = document.getElementById(`skp-${wi}-${ei}`);
+        if (row) row.classList.add('skipped');
+        if (skipBtn) skipBtn.classList.add('skipped');
+      }
+    });
+    updatePct(wi, allEx.length);
+  });
+}
+
+function renderAll() { render(); restoreExChecks(); }
+
+renderAll();
+</script>
+</body>
+</html>
